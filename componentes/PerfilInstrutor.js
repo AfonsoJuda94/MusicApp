@@ -10,6 +10,7 @@ import { FullWindowOverlay } from 'react-native-screens';
 import Icone_instrumento from './Icone_instrumento'
 import { render } from 'react-dom';
 import { Button } from 'react-native-web';
+import Chat from './Chat';
 
 
 const styles = StyleSheet.create({
@@ -120,14 +121,14 @@ const violao = {
     AndreMarcos: 1,
     MarinaBorges: 1,
     GeorgeCarlos: 1,
-    MarcosSousa: 0,
+    MarcosSousa: 1,
     TiagoSilva: 1,
 }
 const saxofone = {
     AndreMarcos: 1,
     MarinaBorges: 0,
     GeorgeCarlos: 0,
-    MarcosSousa: 0,
+    MarcosSousa: 1,
     TiagoSilva: 0,
 }
 const bateria = {
@@ -139,6 +140,7 @@ const bateria = {
 }
 
 function Btn_instrumento(props){
+    
     return(
         <TouchableOpacity style = {styles.btn}>
                 <View style = {styles.losango} />
@@ -157,6 +159,7 @@ function Btn_instrumento(props){
 }
 
 export default function PerfilInstrutor({route}){
+    const navigation = useNavigation();
     const [cor,setCor] = useState(null);
     return(
       <ScrollView >
@@ -218,7 +221,7 @@ export default function PerfilInstrutor({route}){
                     {teclado[route.params.valor] && cor ==2? <Btn_instrumento img = 'teclado' nome = "TECLADO"/>: null}
 
                 </View>
-                <TouchableOpacity style = {styles.chat}>
+                <TouchableOpacity style = {styles.chat} onPress = {() => navigation.navigate('TelaChat',{prof: route.params.valor})}>
                 <Image source={require('../assets/discurso.png')}/>  
                 <Text style = {{color:'white', marginLeft:20}}>Fale com o mentor</Text>
             </TouchableOpacity>

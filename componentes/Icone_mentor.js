@@ -7,7 +7,7 @@ import  'react-native-screens';
 import { Touchable, TouchableOpacity } from 'react-native';
 import {useState} from 'react'
 import PerfilInstrutor from '../componentes/PerfilInstrutor'
-
+import Chat from './Chat';
 export default function Icone_mentor(props){
     const navigation = useNavigation()
     const professores = {
@@ -19,9 +19,9 @@ export default function Icone_mentor(props){
 
     }
     return(
-        <View style = {styles.container}>
-                <TouchableOpacity onPress={() => navigation.navigate("PerfilInstrutor",{valor: props.prof, val_aula: props.v_aula})}>
-                    <Image source={professores[props.prof]} style = {styles.container} resizeMode ='contain' />
+        <View style = {styles.container} resizeMode = 'contain'>
+                <TouchableOpacity onPress={() =>navigation.navigate("PerfilInstrutor",{valor: props.prof, val_aula: props.v_aula})}>
+                    <Image source={professores[props.prof]} style = {styles.container} resizeMode ='contain'/>
                 </TouchableOpacity>
         </View>
     )
