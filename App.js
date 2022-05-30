@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text,ScrollView, View, TextInput, Tab} from 'react-native';
+import { StyleSheet, Text,ScrollView, View, TextInput, Tab, but} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,7 +9,11 @@ import { Touchable, TouchableOpacity } from 'react-native';
 import Icone_instrumento from './componentes/Icone_instrumento';
 import Icone_mentor from './componentes/Icone_mentor'
 import PerfilInstrutor from './componentes/PerfilInstrutor';
+import { useEffect, useState } from 'react';
 import Chat from './componentes/Chat';
+
+
+//import Chat from './componentes/Chat';
 //======================= Inicio das Telas ======================================
 function TelaPrincipal({navigation}){
   const Tab  = createBottomTabNavigator();
@@ -89,7 +93,9 @@ function TelaPrincipal({navigation}){
               <Image source={require('./assets/calendario.png')} resizeMode ='contain'  style={{width:35, height: 25}}/>
               <Text style={{color: 'white'}}>Agenda</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems:'center',padding:10,height:70, width:120,borderWidth:3, borderBottomColor:select==3? '#15ddf7':null}} onPress ={()=>{setSelect(3)}}>
+            <TouchableOpacity 
+            style={{alignItems:'center',padding:10,height:70, width:120,borderWidth:3, borderBottomColor:select==3? '#15ddf7':null}} 
+            onPress ={()=>{setSelect(3); navigation.navigate('SelectChat')}}>
               <Image source={require('./assets/discurso.png')} resizeMode = 'contain' style ={{height:25}}/>
               <Text style={{color: 'white'}}>Chat</Text>
             </TouchableOpacity>
@@ -99,8 +105,66 @@ function TelaPrincipal({navigation}){
     </ScrollView>
   )
 }
+function SelectChat({navigation}){
+  const [select,setSelect] = useState(0)
+  return(
+    <ScrollView>
+      <View style = {{justifyContent: 'flex-start', flex:1, alignItems: 'center', backgroundColor: 'black',paddingTop: 50, paddingBottom: 0 }}>
+      
+      <TouchableOpacity style = {styles.chat_instrutor}
+        onPress = {() =>navigation.navigate('TelaChat', {prof: 'TiagoSilva'})}
+      >
+      <Icone_mentor prof = 'TiagoSilva' nav_perfil ={0}/>
+        <Text style={styles.chat_instrutor_text}>Tiago Silva</Text>
+      </TouchableOpacity>
 
+      <TouchableOpacity style = {styles.chat_instrutor}
+        onPress = {() => navigation.navigate('TelaChat', {prof: 'GeorgeCarlos'})}>
+      <Icone_mentor prof = 'GeorgeCarlos' nav_perfil ={0}/>
+      <Text style={styles.chat_instrutor_text}>George Carlos</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style = {styles.chat_instrutor}
+        onPress = {() => navigation.navigate('TelaChat', {prof: 'MarinaBorges'})}>
+      <Icone_mentor prof = 'MarinaBorges' nav_perfil ={0}/>
+      <Text style={styles.chat_instrutor_text}>Marina Borges</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style = {styles.chat_instrutor}
+        onPress = {() => navigation.navigate('TelaChat', {prof: 'MarcosSousa'})}>
+      <Icone_mentor prof = 'MarcosSousa' nav_perfil ={0}/>
+      <Text style={styles.chat_instrutor_text}>Marcos Sousa</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style = {styles.chat_instrutor}
+        onPress = {() => navigation.navigate('TelaChat', {prof: 'AndreMarcos'})}>
+      <Icone_mentor prof = 'AndreMarcos' nav_perfil ={0}/>
+      <Text style={styles.chat_instrutor_text}>Andre Marcos</Text>
+      </TouchableOpacity>
+      <View style = {styles.barra_navegacao}>
+            <TouchableOpacity style = {{alignItems:'center',padding:10,height:70, width:120,borderWidth:2, borderBottomColor:select==1? '#15ddf7':null}} onPress ={()=>{setSelect(1);navigation.navigate('TelaPrincipal')}}>
+              <Image source={require('./assets/Path.png')}/>
+              <Text style={{color: 'white'}}>Home</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{alignItems:'center',padding:10,height:70, width:120,borderWidth:2, borderBottomColor:select==2? '#15ddf7':null}} onPress ={()=>{setSelect(2)}}>
+              <Image source={require('./assets/calendario.png')} resizeMode ='contain'  style={{width:35, height: 25}}/>
+              <Text style={{color: 'white'}}>Agenda</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+            style={{alignItems:'center',padding:10,height:70, width:120,borderWidth:3, borderBottomColor:select==3? '#15ddf7':null}} 
+            onPress ={()=>{setSelect(3); navigation.navigate('SelectChat')}}>
+              <Image source={require('./assets/discurso.png')} resizeMode = 'contain' style ={{height:25}}/>
+              <Text style={{color: 'white'}}>Chat</Text>
+            </TouchableOpacity>
+            
+      </View>
+    </View>
+    </ScrollView>
+    
+  )
+}
 function TelaBoasVindas({navigation}){
+  
   return(
       <View style = {styles.TelaInicial}>
         <Image source={require('./assets/Musico3.png')} style={{position: 'absolute', bottom: -220, width:400}}/>
@@ -119,6 +183,7 @@ function TelaBoasVindas({navigation}){
       </View>
     );
 }
+
 //========================= Perfil do instrutor ==============================
 
 
@@ -138,7 +203,8 @@ export default function App() {
         <Screen name="Tela " component={TelaBoasVindas}/>
         <Screen name="TelaPrincipal" component={TelaPrincipal}/>
         <Screen name="PerfilInstrutor" component={PerfilInstrutor}/>
-        <Screen name = "chat" component={Chat}/>
+        <Screen name ='SelectChat' component={SelectChat}/>
+        <Screen name='TelaChat' component={Chat}/>
         
       </Navigator>
     </NavigationContainer>
@@ -196,4 +262,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
 
   },
+  chat_instrutor:{
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 15,
+    width:'80%',
+    marginTop: 30,
+    flexDirection: 'row',
+    padding: 10
+  },
+  chat_instrutor_text:{
+    marginTop: 30,
+    fontSize: 20, fontWeight: 'bold', color: 'white'
+  }
 });
