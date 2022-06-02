@@ -21,7 +21,7 @@ export default function Icone_mentor(props){
     return(
         <View style = {styles.container} resizeMode = 'contain'>
                 <TouchableOpacity onPress={() =>navigation.navigate("PerfilInstrutor",{valor: props.prof, val_aula: props.v_aula})}>
-                    <Image source={professores[props.prof]} style = {styles.container} resizeMode ='contain'/>
+                    <Image source={professores[props.prof]} style = {styles.container&& {width: props.tamanho ==null?100:props.tamanho,height: props.tamanho==null?100:props.tamanho,borderRadius:50}} resizeMode ='contain'/>
                 </TouchableOpacity>
         </View>
     )
@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
     container:{
         borderRadius: 50,
         borderColor: 'red',
-        width: 100,
-        height: 100,
         marginRight: 20
     }
 })

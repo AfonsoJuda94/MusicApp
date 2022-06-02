@@ -97,12 +97,12 @@ export default function Chat({route}) {
       
       <View style={styles.chat}>
         <View style = {styles.topo}>
-          <Icone_mentor prof = {route.params.prof} style = {{height:5}}/>
-          <Text style = {{color: 'white',marginTop:50,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='TiagoSilva'? 'Tiago Silva': null}</Text>
-          <Text style = {{color: 'white',marginTop:50,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='MarcosSousa'? 'Marcos Sousa': null}</Text>
-          <Text style = {{color: 'white',marginTop:50,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='MarinaBorges'? 'Marina Borges': null}</Text>
-          <Text style = {{color: 'white',marginTop:50,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='GeorgeCarlos'? 'George Carlos': null}</Text>
-          <Text style = {{color: 'white',marginTop:50,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='AndreMarcos'? 'Andre Marcos': null}</Text>
+          <Icone_mentor prof = {route.params.prof} style = {{height:5}} tamanho = {80}/>
+          <Text style = {{color: 'white',marginTop:30,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='TiagoSilva'? 'Tiago Silva': null}</Text>
+          <Text style = {{color: 'white',marginTop:30,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='MarcosSousa'? 'Marcos Sousa': null}</Text>
+          <Text style = {{color: 'white',marginTop:30,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='MarinaBorges'? 'Marina Borges': null}</Text>
+          <Text style = {{color: 'white',marginTop:30,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='GeorgeCarlos'? 'George Carlos': null}</Text>
+          <Text style = {{color: 'white',marginTop:30,fontSize:17, fontWeight: 'bold'}}>{route.params.prof=='AndreMarcos'? 'Andre Marcos': null}</Text>
         </View>
         <GiftedChat renderInputToolbar={props => customtInputToolbar(props)}
       messages={messeges} user = {user} onSend ={handleSend}/>

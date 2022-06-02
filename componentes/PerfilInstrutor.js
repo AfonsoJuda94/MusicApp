@@ -72,6 +72,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }
 })
+const MarcosSousa = [
+    'Muito boa a aula.',
+     'O professor realmente me deu uma boa base de violão.'
+
+]
+     
+const TiagoSilva = [
+    'Experiência de aprendizado 100%. Recomendo a todos!',
+    'Desde que apredi Sax, jazz virou minha segunda vida.',
+    'O professor é muito bom.'
+]
+const MarinaBorges =[
+    'A paixão da professora pela música me contagiou. Quero começar uma carreira também.',
+    'O curso vale a pena. Nunca vi nada parecido.',
+    'Meu filho está aprendendo teclado e está gostando muito. Recomendo a todos!'
+]
+const GeorgeCarlos =[
+    'O professor é fera em violão. Muito gente boa também.',
+    'Preço justo! É muito bom encotrar alguém que democratize o aprendizado de música.',
+    'As aulas são muito boas. Estou começando a pegar jeito pra música.'
+
+]
+const AndreMarcos = [
+    'Um gênio do Saxofone. O professor realmente entende de didática também.',
+    'Muito boas as aulas. Recomendo a todos.',
+    'Finalmente estou dando continuidade ao meu sonho de tocar bateria. Muito obrigado professor por tornar isso possível!'
+]
+
 const imgs ={
     violao: require('../assets/Violao.png'),
     piano: require('../assets/Piano.png'),
@@ -158,9 +186,22 @@ function Btn_instrumento(props){
     )
 }
 
+function Avaliacao(p){
+    return(
+        <View style ={{width:350, height:150,backgroundColor:'gray', borderRadius:30, margin: 20, position: 'relative', top:-200, flexDirection: 'row', alignItems: 'center' }}>
+            <Image source={require('../assets/perfil.png')} style={{marginLeft:20,marginTop:10}} resizeMode= 'contain'/>
+            <Text style = {{marginLeft: 10, marginTop:30, width:200}}>{p.texto}</Text>
+        </View>
+
+    )
+}
+
 export default function PerfilInstrutor({route}){
     const navigation = useNavigation();
     const [cor,setCor] = useState(null);
+    
+
+    
     return(
       <ScrollView >
           <View style = {styles.container}>
@@ -204,6 +245,7 @@ export default function PerfilInstrutor({route}){
                     }
                     
                 </Text>
+                
                 {cor==1? 
                 <View style = {{ position:'relative', bottom: 50,left:30}}>
                     <Text style = {{color:'white'}}>
@@ -213,14 +255,29 @@ export default function PerfilInstrutor({route}){
                 </View>
                 :null}
                 
-                <View style ={{width: cor!=2? null : 400, justifyContent: 'center',alignItems: 'center'}}>
+                <View style ={{width: cor!=2|| cor!=3? null : 300, justifyContent: 'center',alignItems: 'center'}}>
                     {piano[route.params.valor] && cor ==2? <Btn_instrumento img = 'piano' nome = "PIANO"/>: null}
                     {violao[route.params.valor] && cor ==2? <Btn_instrumento img = 'violao' nome = "VIOLÃO"/>: null}
                     {bateria[route.params.valor] && cor ==2? <Btn_instrumento img = 'bateria' nome = "BATERIA"/>: null}
                     {saxofone[route.params.valor] && cor ==2? <Btn_instrumento img = 'saxofone' nome = "SAXOFONE"/>: null}
                     {teclado[route.params.valor] && cor ==2? <Btn_instrumento img = 'teclado' nome = "TECLADO"/>: null}
-
+                    { cor ==3 && route.params.valor=='MarcosSousa'?
+                    MarcosSousa.map((b,d) => (<Avaliacao key = {b} texto={MarcosSousa[d]}/>))
+                    :null}
+                    { cor ==3 && route.params.valor=='TiagoSilva'?
+                    TiagoSilva.map((b,d) => (<Avaliacao key = {b} texto={TiagoSilva[d]}/>))
+                    :null}
+                    { cor ==3 && route.params.valor=='MarinaBorges'?
+                    MarinaBorges.map((b,d) => (<Avaliacao key = {b} texto={MarinaBorges[d]}/>))
+                    :null}
+                    { cor ==3 && route.params.valor=='GeorgeCarlos'?
+                    GeorgeCarlos.map((b,d) => (<Avaliacao key = {b} texto={GeorgeCarlos[d]}/>))
+                    :null}
+                    { cor ==3 && route.params.valor=='AndreMarcos'?
+                    AndreMarcos.map((b,d) => (<Avaliacao key = {b} texto={AndreMarcos[d]}/>))
+                    :null}
                 </View>
+                
                 <TouchableOpacity style = {styles.chat} onPress = {() => navigation.navigate('TelaChat',{prof: route.params.valor})}>
                 <Image source={require('../assets/discurso.png')}/>  
                 <Text style = {{color:'white', marginLeft:20}}>Fale com o mentor</Text>
